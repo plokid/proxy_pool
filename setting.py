@@ -26,7 +26,7 @@ BANNER = r"""
 """
 
 # ############### server config ###############
-HOST = "0.0.0.0"
+HOST = "127.0.0.1"
 
 PORT = 5010
 
@@ -35,7 +35,7 @@ PORT = 5010
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:pwd@127.0.0.1:6379/0'
+DB_CONN = 'redis://:redis816357492@127.0.0.1:6379/0'
 
 # proxy table name
 TABLE_NAME = 'use_proxy'
@@ -52,13 +52,13 @@ PROXY_FETCHER = [
     "freeProxy07",
     # "freeProxy08",
     "freeProxy09",
-    "freeProxy13",
+    #"freeProxy13",
     "freeProxy14",
     "freeProxy15",
 ]
 
 # ############# proxy validator #################
-VERIFY_URL = "http://www.baidu.com"
+VERIFY_URL = "https://www.baidu.com"
 
 VERIFY_TIMEOUT = 10
 
@@ -74,4 +74,4 @@ MAX_FAIL_COUNT = 0
 # Please uncomment the following line and set a timezone for the scheduler.
 # Otherwise it will detect the timezone from the system automatically.
 
-# TIMEZONE = "Asia/Shanghai"
+TIMEZONE = "Asia/Shanghai"
