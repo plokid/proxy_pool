@@ -26,7 +26,7 @@ BANNER = r"""
 """
 
 # ############### server config ###############
-HOST = "127.0.0.1"
+HOST = "0.0.0.0"
 
 PORT = 5010
 
@@ -35,7 +35,7 @@ PORT = 5010
 # example:
 #      Redis: redis://:password@ip:port/db
 #      Ssdb:  ssdb://:password@ip:port
-DB_CONN = 'redis://:redis816357492@127.0.0.1:6379/0'
+DB_CONN = 'redis://127.0.0.1:6379/0'
 
 # proxy table name
 TABLE_NAME = 'use_proxy'

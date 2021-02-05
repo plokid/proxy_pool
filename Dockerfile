@@ -1,6 +1,6 @@
 FROM python:3.6-alpine
 
-MAINTAINER jhao104 <j_hao104@163.com>
+# MAINTAINER jhao104 <j_hao104@163.com>
 
 ENV TZ Asia/Shanghai
 
@@ -10,7 +10,7 @@ COPY ./requirements.txt .
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
-RUN apk add musl-dev gcc libxml2-dev libxslt-dev && \
+RUN apk add --no-cache musl-dev gcc libxml2-dev libxslt-dev redis && \
     pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple/ && \
     apk del gcc musl-dev
 
