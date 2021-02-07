@@ -2,3 +2,5 @@
 docs/_build
 *.pyc
 *.log
+.vscode
+venv
