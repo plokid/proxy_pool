@@ -17,8 +17,11 @@ from lxml import etree
 import requests
 import random
 import time
+import demjson
 
 from handler.logHandler import LogHandler
+from db.dbClient import DbClient
+from setting import HOST, PORT 
 
 requests.packages.urllib3.disable_warnings()
 
@@ -29,6 +32,7 @@ class WebRequest(object):
     def __init__(self, *args, **kwargs):
         self.log = LogHandler(self.name, file=False)
         self.response = Response()
+        self.db = DbClient()
 
     @property
     def user_agent(self):
@@ -74,10 +78,18 @@ class WebRequest(object):
             headers.update(header)
         while True:
             try:
-                self.response = requests.get(url, headers=headers, timeout=timeout, *args, **kwargs)
+                self.proxy = self.db.get()
+                if self.proxy:
+                    self.proxy = demjson.decode(self.proxy)['proxy']
+                    self.proxies = {'http':'http://'+self.proxy,'https':'http://'+self.proxy}
+                    #print(self.proxies)
+                    self.response = requests.get(url, headers=headers, timeout=timeout, proxies=self.proxies, *args, **kwargs)
+                else:
+                    self.response = requests.get(url, headers=headers, timeout=timeout, *args, **kwargs)
                 return self
             except Exception as e:
                 self.log.error("requests: %s error: %s" % (url, str(e)))
+                self.db.delete(self.proxy)
                 retry_time -= 1
                 if retry_time <= 0:
                     resp = Response()
