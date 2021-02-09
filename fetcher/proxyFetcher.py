@@ -332,7 +332,7 @@ class ProxyFetcher(object):
     def freeProxy16():
         urls = ['https://proxy.seofangfa.com/']
         for url in urls:
-            r = requests.get(url, timeout=10)
+            r = WebRequest.get(url, timeout=10)
             ips = re.findall(r'<td.*?>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\s\S]*?<td.*?>(\d+)</td>',r.text)
             for ip in ips:
                 yield ':'.join(ip)
