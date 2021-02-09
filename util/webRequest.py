@@ -82,7 +82,6 @@ class WebRequest(object):
                 if self.proxy:
                     self.proxy = demjson.decode(self.proxy)['proxy']
                     self.proxies = {'http':'http://'+self.proxy,'https':'http://'+self.proxy}
-                    #print(self.proxies)
                     self.response = requests.get(url, headers=headers, timeout=timeout, proxies=self.proxies, *args, **kwargs)
                 else:
                     self.response = requests.get(url, headers=headers, timeout=timeout, *args, **kwargs)
