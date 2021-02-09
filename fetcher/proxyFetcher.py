@@ -16,6 +16,7 @@ import re
 from time import sleep
 
 from util.webRequest import WebRequest
+from util.imagecode import image_to_code
 
 
 class ProxyFetcher(object):
@@ -336,3 +337,17 @@ class ProxyFetcher(object):
             ips = re.findall(r'<td.*?>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\s\S]*?<td.*?>(\d+)</td>',r.text)
             for ip in ips:
                 yield ':'.join(ip)
+
+    @staticmethod
+    def freeProxy17():
+        urls = ['https://proxy.mimvp.com/freesecret',
+                'https://proxy.mimvp.com/freesole',
+                'https://proxy.mimvp.com/freeopen']
+        for url in urls:
+            r = WebRequest.get(url, timeout=10).tree
+            ips = r.xpath('//tbody/tr/td[2]/text()')
+            images_urls = r.xpath('//tbody/tr/td[3]//@src')
+            for i in range(len(ips)):
+                image = WebRequest.get('https://proxy.mimvp.com'+images_urls[i], timeout=10)
+                code = image_to_code(image)
+                yield f'{ips[i]}:{code}'

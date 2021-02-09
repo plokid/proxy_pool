@@ -55,6 +55,8 @@ PROXY_FETCHER = [
     #"freeProxy13",
     "freeProxy14",
     "freeProxy15",
+    "freeProxy16",
+    "freeProxy17",
 ]
 
 # ############# proxy validator #################
