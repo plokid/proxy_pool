@@ -105,6 +105,7 @@ class WebRequest(object):
     def text(self):
         return self.response.text
 
+    @property
     def content(self):
         return self.response.content
 

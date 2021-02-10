@@ -333,7 +333,7 @@ class ProxyFetcher(object):
     def freeProxy16():
         urls = ['https://proxy.seofangfa.com/']
         for url in urls:
-            r = WebRequest.get(url, timeout=10)
+            r = WebRequest().get(url, timeout=10)
             ips = re.findall(r'<td.*?>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</td>[\s\S]*?<td.*?>(\d+)</td>',r.text)
             for ip in ips:
                 yield ':'.join(ip)
@@ -344,10 +344,10 @@ class ProxyFetcher(object):
                 'https://proxy.mimvp.com/freesole',
                 'https://proxy.mimvp.com/freeopen']
         for url in urls:
-            r = WebRequest.get(url, timeout=10).tree
+            r = WebRequest().get(url, timeout=10).tree
             ips = r.xpath('//tbody/tr/td[2]/text()')
             images_urls = r.xpath('//tbody/tr/td[3]//@src')
             for i in range(len(ips)):
-                image = WebRequest.get('https://proxy.mimvp.com'+images_urls[i], timeout=10)
+                image = WebRequest().get('https://proxy.mimvp.com'+images_urls[i]).content
                 code = image_to_code(image)
                 yield f'{ips[i]}:{code}'
