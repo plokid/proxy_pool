@@ -351,3 +351,14 @@ class ProxyFetcher(object):
                 image = WebRequest().get('https://proxy.mimvp.com'+images_urls[i]).content
                 code = image_to_code(image)
                 yield f'{ips[i]}:{code}'
+    
+    @staticmethod
+    def freeProxy18():
+        urls = ['http://www.nimadaili.com/gaoni/',
+                'http://www.nimadaili.com/http/',
+                'http://www.nimadaili.com/https/']
+        for url in urls:
+            r = WebRequest().get(url).tree
+            ips = r.xpath('//tbody//td[1]/text()')
+            for ip in ips:
+                yield ip
