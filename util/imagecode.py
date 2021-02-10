@@ -10,4 +10,4 @@ def image_to_code(content):
 
     code = pytesseract.image_to_string(image)                                                   
 
-    return str(int(code))
+    return code.strip()
