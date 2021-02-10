@@ -17,7 +17,6 @@ from lxml import etree
 import requests
 import random
 import time
-import demjson
 
 from handler.logHandler import LogHandler
 from handler.proxyHandler import ProxyHandler
@@ -80,7 +79,6 @@ class WebRequest(object):
             try:
                 self.proxy = self.db.get()
                 if self.proxy:
-                    self.proxy = self.proxy.to_dict['proxy']
                     self.proxies = {'http':'http://'+self.proxy,'https':'http://'+self.proxy}
                     self.response = requests.get(url, headers=headers, timeout=timeout, proxies=self.proxies, *args, **kwargs)
                 else:
